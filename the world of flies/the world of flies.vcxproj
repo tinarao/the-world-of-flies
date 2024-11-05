@@ -128,6 +128,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="classes\Player.cpp" />
+    <ClCompile Include="classes\TextureManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="classes\Player.h" />
+    <ClInclude Include="classes\TextureManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\player\walk.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
