@@ -16,6 +16,10 @@ Texture2D TextureManager::load(const char* path, std::string name) {
 	return tex;
 }
 
+Textures TextureManager::get_textures() {
+    return this->textures;
+}
+
 TextureManager* TextureManager::GetInstance() {
     std::lock_guard<std::mutex> lock(mutex_);
     if (instance == nullptr)

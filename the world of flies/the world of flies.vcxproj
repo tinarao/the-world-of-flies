@@ -127,16 +127,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="config.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="classes\Player.cpp" />
     <ClCompile Include="classes\TextureManager.cpp" />
+    <ClCompile Include="classes\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classes\Player.h" />
     <ClInclude Include="classes\TextureManager.h" />
+    <ClInclude Include="classes\Tile.h" />
+    <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\player\walk.png" />
+    <Image Include="assets\terrain\grass.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

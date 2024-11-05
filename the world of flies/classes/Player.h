@@ -17,9 +17,15 @@ private:
 
 	State currentState;
 
+	void handle_controls();
+	void handle_movement();
+	void draw() const;
+
+	float speed;
+
 public:
 	Player(float p_x, float p_y, Texture2D p_texture);
-	void draw() const;
+	void update();
 };
 
 #endif // !Player

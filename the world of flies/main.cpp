@@ -2,24 +2,24 @@
 #include <iostream>
 #include "classes/TextureManager.h"
 #include "classes/Player.h"
-
-const int SCREEN_H = 1200;
-const int SCREEN_W = 600;
+#include "classes/Tile.h"
+#include "config.h"
 
 int main() {
 	InitWindow(SCREEN_H, SCREEN_W, "The World Of Flies");
 	SetTargetFPS(60);
 
-	Texture2D tex = TextureManager::GetInstance()->load("assets/player/walk.png", "player_idle");
-	Player player = Player(192, 192, tex);
-
-	std::cout << tex.width << std::endl;
+	Texture2D player_tex = TextureManager::GetInstance()->load("assets/player/walk.png", "player_idle");
+	Texture2D grass_tex = TextureManager::GetInstance()->load("assets/terrain/grass.png", "terrain_grass");
+	Player player = Player(1000, 192, player_tex);
+	Tile grassTile = Tile(128, 128, grass_tex, true);
 
 	while (!WindowShouldClose()) {
 		BeginDrawing();
 		ClearBackground(WHITE);
 
-		player.draw();
+		player.update();
+		grassTile.draw();
 
 		EndDrawing();
 	}
