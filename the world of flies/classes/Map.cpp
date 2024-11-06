@@ -9,7 +9,11 @@ Map* Map::instance{ nullptr };
 std::mutex Map::mutex_;
 
 Map::Map() {
-    TileMap tilemap(20, std::vector<int>(30, 0));
+    this->map_h = 20;
+    this->map_w = 30;
+    // TODO: Read the XML attr "width" and "height"
+
+    TileMap tilemap(this->map_h, std::vector<int>());
     this->tilemap = tilemap;
 }
 
@@ -42,24 +46,28 @@ void Map::parse_tmx() {
     }
     
     if (int_vec_map.size() == map_w * map_h) {
-        std::cout << "Dropped a temp str_data_vec vector" << std::endl;
         temp_str_data_vec.clear();
     }
 
     int y_axis = 0;
     for (int tile_idx = 0; tile_idx < int_vec_map.size(); tile_idx++) {
-        if (tile_idx % 30 == 0 && tile_idx != 0) {
+        if (tile_idx % this->map_w == 0 && tile_idx != 0) {
             y_axis++;
         }
 
         this->tilemap[y_axis].push_back(int_vec_map[tile_idx]);
     }
+
 }
 
 void Map::draw() {
-    // Get parsed data
-    // Draw on screen
-    // Done!
+    for (int y = 0; y < this->map_h; y++) {
+        for (int x = 0; x < this->map_w; x++) {
+            std::cout << this->tilemap[y][x];
+        }
+        
+        std::cout << '\n';
+    }
 }
 
 void Map::init() {

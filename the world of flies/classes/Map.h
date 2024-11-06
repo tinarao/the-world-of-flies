@@ -13,6 +13,8 @@ private:
 	Map();
 
 	TileMap tilemap;
+	int map_w;
+	int map_h;
 
 	void parse_tmx();
 	void draw();
