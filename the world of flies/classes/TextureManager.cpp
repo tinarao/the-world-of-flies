@@ -22,8 +22,7 @@ Textures TextureManager::get_textures() {
 
 TextureManager* TextureManager::GetInstance() {
     std::lock_guard<std::mutex> lock(mutex_);
-    if (instance == nullptr)
-    {
+    if (instance == nullptr) {
         instance = new TextureManager();
     }
 

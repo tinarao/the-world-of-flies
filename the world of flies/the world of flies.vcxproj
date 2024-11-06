@@ -132,16 +132,23 @@
     <ClCompile Include="classes\Player.cpp" />
     <ClCompile Include="classes\TextureManager.cpp" />
     <ClCompile Include="classes\Tile.cpp" />
+    <ClCompile Include="classes\Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classes\Player.h" />
     <ClInclude Include="classes\TextureManager.h" />
     <ClInclude Include="classes\Tile.h" />
+    <ClInclude Include="classes\Map.h" />
+    <ClInclude Include="libs\raylib-tmx.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\player\walk.png" />
     <Image Include="assets\terrain\grass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+    <None Include="map.tmx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,8 +7,7 @@
 #include <mutex>
 #include "../types.h"
 
-class TextureManager
-{
+class TextureManager {
 private:
 	static TextureManager* instance;
 	static std::mutex mutex_;
