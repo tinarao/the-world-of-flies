@@ -17,13 +17,13 @@ private:
 	int map_h;
 
 	void parse_tmx();
-	void draw();
+	Texture2D tileset;
 public:
 	Map(Map& other) = delete;
 	void operator=(const Map&) = delete;
 	static Map* GetInstance();
 
-	void init();
+	void draw() const;
 };
 
 #endif // !MAP_H

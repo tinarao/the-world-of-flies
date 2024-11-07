@@ -3,7 +3,7 @@
 #include "../config.h"
 
 Player::Player(float p_x, float p_y, Texture2D p_texture) {
-	this->dstRect = { p_x, p_y, RENDERED_TILE_SIZE, RENDERED_TILE_SIZE };
+	this->dstRect = { p_x, p_y, RENDERED_TILE_SIZE * 4, RENDERED_TILE_SIZE * 4 };
 	this->srcRect = { 0, 0, BASE_TILE_SIZE, BASE_TILE_SIZE };
 	this->currentState = sIdle;
 	this->texture = p_texture;

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "TextureManager.h"
 
 TextureManager* TextureManager::instance{ nullptr };
@@ -27,4 +28,10 @@ TextureManager* TextureManager::GetInstance() {
     }
 
     return instance;
+}
+
+void TextureManager::clean() {
+    for (const auto &pair : this->textures) {
+        UnloadTexture(pair.second);
+    }
 }

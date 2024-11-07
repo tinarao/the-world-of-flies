@@ -145,6 +145,7 @@
   <ItemGroup>
     <Image Include="assets\player\walk.png" />
     <Image Include="assets\terrain\grass.png" />
+    <Image Include="assets\tileset.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

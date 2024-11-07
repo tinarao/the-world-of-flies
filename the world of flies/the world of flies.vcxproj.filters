@@ -61,6 +61,9 @@
     <Image Include="assets\terrain\grass.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="assets\tileset.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="map.tmx" />

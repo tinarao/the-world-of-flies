@@ -24,6 +24,7 @@ public:
 
 	Texture2D load(const char* path, std::string name);
 	Textures get_textures();
+	void clean();
 };
 
 
