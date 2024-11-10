@@ -20,9 +20,20 @@ protected:
 	Rectangle dstRect;
 	bool is_collide_with_player;
 public:
-	Tile(Rectangle p_src, Rectangle p_dst, Texture2D tex, bool collision);
+	Tile(Rectangle p_src, Rectangle p_dst, Texture2D tex, bool collision) {
+		this->dstRect = p_dst;
+		this->srcRect = p_src;
+		this->texture = tex;
+		this->is_collide_with_player = collision;
+	}
 
-	void draw() const;
+	void draw() const {
+		DrawTexturePro(this->texture, this->srcRect, this->dstRect, { 0, 0 }, 0, RAYWHITE);
+	}
+
+	Rectangle getDstRect() const {
+		return this->dstRect;
+	}
 };
 
 #endif // !TILE_H

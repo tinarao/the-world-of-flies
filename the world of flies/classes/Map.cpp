@@ -24,6 +24,7 @@ Map::Map() {
 
 	TileMap tilemap(this->map_h, std::vector<int>());
 	this->tilemap = tilemap;
+	this->tiles = {};
 
 	this->parse_tmx();
 }
@@ -71,7 +72,7 @@ void Map::parse_tmx() {
 
 }
 
-void Map::draw() const {
+void Map::load_tiles() {
 	for (int y = 0; y < this->map_h; y++) {
 		for (int x = 0; x < this->map_w; x++) {
 			if (this->tilemap[y][x] == TileVariant::Air) {
@@ -93,25 +94,41 @@ void Map::draw() const {
 				Rectangle src = {
 					32,
 					32,
-					RENDERED_TILE_SIZE,
-					RENDERED_TILE_SIZE
+					BASE_TILE_SIZE,
+					BASE_TILE_SIZE
 				};
 
 				Tile dirtTile = Tile(src, dst, this->tileset, true);
-				dirtTile.draw();
+				this->tiles.push_back(dirtTile);
 			}
 			else if (tile_type == GRASS_TILE) {
 				std::cout << "Rendered a grass tile." << std::endl;
 				Rectangle src = {
 					32,
 					0,
-					RENDERED_TILE_SIZE,
-					RENDERED_TILE_SIZE
+					BASE_TILE_SIZE,
+					BASE_TILE_SIZE
 				};
 
 				Tile grassTile = Tile(src, dst, this->tileset, true);
-				grassTile.draw();
+				this->tiles.push_back(grassTile);
 			}
 		}
 	}
+}
+
+void Map::draw() {
+	for (const auto& tile : this->tiles) {
+		tile.draw();
+	}
+}
+
+bool Map::is_player_collided(Player* player) {
+	for (const auto& tile : this->tiles) {
+		if (CheckCollisionRecs(player->getDstRect(), tile.getDstRect())) {
+			return true;
+		}
+	}
+
+	return false;
 }

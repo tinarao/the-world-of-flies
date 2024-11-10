@@ -2,8 +2,11 @@
 #define MAP_H
 
 #include <mutex>
+#include <vector>
 #include <tinyxml2.h>
 #include "../types.h"
+#include "Player.h"
+#include "Tile.h"
 
 class Map {
 private:
@@ -13,6 +16,7 @@ private:
 	Map();
 
 	TileMap tilemap;
+	std::vector<Tile> tiles;
 	int map_w;
 	int map_h;
 
@@ -23,7 +27,9 @@ public:
 	void operator=(const Map&) = delete;
 	static Map* GetInstance();
 
-	void draw() const;
+	void draw();
+	bool is_player_collided(Player* player);
+	void load_tiles();
 };
 
 #endif // !MAP_H

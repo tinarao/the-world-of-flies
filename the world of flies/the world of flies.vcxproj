@@ -131,7 +131,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="classes\Player.cpp" />
     <ClCompile Include="classes\TextureManager.cpp" />
-    <ClCompile Include="classes\Tile.cpp" />
     <ClCompile Include="classes\Map.cpp" />
   </ItemGroup>
   <ItemGroup>

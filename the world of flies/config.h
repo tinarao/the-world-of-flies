@@ -6,9 +6,9 @@
 #define PLAYER_JUMP KEY_SPACE
 
 #define BASE_TILE_SIZE 32
-#define RENDERED_TILE_SIZE 32
+#define RENDERED_TILE_SIZE 64
 
-constexpr auto SCREEN_H = 1200;
-constexpr auto SCREEN_W = 600;
+constexpr auto SCREEN_H = 600;
+constexpr auto SCREEN_W = 1200;
 
 #endif // !CONFIG_H

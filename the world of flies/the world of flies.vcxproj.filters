@@ -27,9 +27,6 @@
     <ClCompile Include="config.h">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="classes\Tile.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="classes\Map.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
