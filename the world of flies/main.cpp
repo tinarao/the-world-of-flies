@@ -36,7 +36,10 @@ int main() {
 			BeginMode2D(camera);
 			camera.target = player.getPosition();
 
-			DrawFPS(15, 15);
+			// Camera zoom controls
+			camera.zoom += ((float)GetMouseWheelMove() * 0.05f);
+			if (camera.zoom > 3.0f) camera.zoom = 3.0f;
+			else if (camera.zoom < 0.1f) camera.zoom = 0.1f;
 
 			DrawTextureEx(bg_tex, { 0, 0 }, 0, 2, RAYWHITE);
 			Map::GetInstance()->draw();

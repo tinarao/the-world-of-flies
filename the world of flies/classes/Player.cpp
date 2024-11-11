@@ -9,10 +9,21 @@ Player::Player(float p_x, float p_y, Texture2D p_texture) {
 	this->currentState = sIdle;
 	this->texture = p_texture;
 	this->speed = 150;
+
+	this->collisionDetector = { this->dstRect.x + RENDERED_TILE_SIZE / 2, this->dstRect.y + RENDERED_TILE_SIZE / 2, this->dstRect.width / 2 + 1, 8 };
 }
 
 void Player::draw() const {
-	DrawTexturePro(this->texture, this->srcRect, this->dstRect, { 0, 0 }, 0, WHITE);
+	DrawTexturePro(
+		this->texture, 
+		this->srcRect, 
+		this->dstRect, 
+		{ 0, 0 }, 
+		0, 
+		WHITE
+	);
+
+	DrawRectanglePro(this->collisionDetector, { 0,0 }, 0.0f, { 0, 0, 0, 0 });
 }
 
 Vector2 Player::getPosition() {
@@ -37,15 +48,31 @@ void Player::handle_controls() {
 void Player::update() {
 	this->handle_controls();
 	this->handle_movement();
+
+	if (this->currentState == sWalkLeft) {
+		this->collisionDetector.x = (this->dstRect.x - RENDERED_TILE_SIZE / 2) + this->dstRect.width / 2;
+	} else if (this->currentState == sWalkRight) {
+		this->collisionDetector.x = this->dstRect.x + RENDERED_TILE_SIZE / 2;
+	}
+
+	this->collisionDetector.y = this->dstRect.y + RENDERED_TILE_SIZE / 2;
 }
 
 void Player::handle_movement() {
 	float tick = GetFrameTime();
 
+	Rectangle collision = Map::GetInstance()->GetCollisionsWithPlayer(this);
+	if (collision.width != 0) {
+		this->isCollided = true;
+		this->collisionDirection = this->dstRect.x - collision.x > 0 ? Left : Right;
+	}
+	else {
+		this->isCollided = false;
+	}
+
 	switch (this->currentState) {
 	case sWalkLeft:
-		std::cout << "Move Left" << std::endl;
-		if (Map::GetInstance()->is_player_collided(this)) {
+		if (isCollided && this->collisionDirection == Left) {
 			break;
 		}
 
@@ -53,8 +80,7 @@ void Player::handle_movement() {
 		this->srcRect.width = BASE_TILE_SIZE;
 		break;
 	case sWalkRight:
-		std::cout << "Move Right" << std::endl;
-		if (Map::GetInstance()->is_player_collided(this)) {
+		if (isCollided && this->collisionDirection == Right) {
 			break;
 		}
 
@@ -66,8 +92,10 @@ void Player::handle_movement() {
 	}
 }
 
-
-
 Rectangle Player::getDstRect() const {
 	return this->dstRect;
+}
+
+Rectangle Player::getCollisionChecker() const {
+	return this->collisionDetector;
 }

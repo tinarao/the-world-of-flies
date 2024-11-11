@@ -28,7 +28,7 @@ public:
 	static Map* GetInstance();
 
 	void draw();
-	bool is_player_collided(Player* player);
+	Rectangle GetCollisionsWithPlayer(Player* player);
 	void load_tiles();
 };
 

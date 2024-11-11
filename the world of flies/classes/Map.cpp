@@ -123,12 +123,15 @@ void Map::draw() {
 	}
 }
 
-bool Map::is_player_collided(Player* player) {
+Rectangle Map::GetCollisionsWithPlayer(Player* player) {
+	Rectangle collisionRect = { 0, 0, 0, 0 };
+
 	for (const auto& tile : this->tiles) {
-		if (CheckCollisionRecs(player->getDstRect(), tile.getDstRect())) {
-			return true;
+		if (CheckCollisionRecs(player->getCollisionChecker(), tile.getDstRect())) {
+			collisionRect = GetCollisionRec(player->getCollisionChecker(), tile.getDstRect());
+			break;
 		}
 	}
 
-	return false;
+	return collisionRect;
 }
