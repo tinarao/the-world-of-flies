@@ -123,7 +123,7 @@ void Map::draw() {
 	}
 }
 
-Rectangle Map::GetCollisionsWithPlayer(Player* player) {
+Rectangle Map::GetCollisionRectangle(Player* player) {
 	Rectangle collisionRect = { 0, 0, 0, 0 };
 
 	for (const auto& tile : this->tiles) {

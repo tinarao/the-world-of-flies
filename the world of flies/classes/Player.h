@@ -12,6 +12,7 @@ private:
 	Texture2D texture;
 
 	bool isCollided;
+	bool isOnFloor;
 
 	enum CollisionDirection {
 		Left = 0,
@@ -39,6 +40,7 @@ public:
 	Vector2 getPosition();
 	Rectangle getDstRect() const;
 	Rectangle getCollisionChecker() const;
+	void handleGravity(float ticks);
 };
 
 #endif // !Player
