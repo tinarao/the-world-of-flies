@@ -12,7 +12,7 @@ int main() {
 	Texture2D bg_tex = TextureManager::GetInstance()->load("assets/bg.png", "bg");
 	Texture2D player_tex = TextureManager::GetInstance()->load("assets/player/walk.png", "player_idle");
 	Texture2D grass_tex = TextureManager::GetInstance()->load("assets/terrain/grass.png", "terrain_grass");
-	Player player = Player(300, 450, player_tex);
+	Player player = Player(390, 450, player_tex);
 
 	Camera2D camera = Camera2D{
 		{ SCREEN_W / 2 - RENDERED_TILE_SIZE / 2, SCREEN_H / 2 - RENDERED_TILE_SIZE / 2 },
@@ -37,7 +37,7 @@ int main() {
 			camera.target = player.getPosition();
 
 			// Camera zoom controls
-			camera.zoom += ((float)GetMouseWheelMove() * 0.05f);
+			camera.zoom += GetMouseWheelMove() * 0.05f;
 			if (camera.zoom > 3.0f) camera.zoom = 3.0f;
 			else if (camera.zoom < 0.1f) camera.zoom = 0.1f;
 
