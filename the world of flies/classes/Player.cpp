@@ -10,14 +10,24 @@ Player::Player(float p_x, float p_y, Texture2D p_texture) {
 	this->srcRect = { 0, 0, BASE_TILE_SIZE, BASE_TILE_SIZE };
 	this->currentState = sIdle;
 	this->texture = p_texture;
-	this->speed = 150;
+	this->speed = 300;
 
-	/*this->collisionDetector = { this->dstRect.x + RENDERED_TILE_SIZE / 2, this->dstRect.y + RENDERED_TILE_SIZE / 2, this->dstRect.width / 2 + 1, 8 };*/
-	this->collisionDetector = { 
-		this->dstRect.x - 1, 
-		this->dstRect.y, 
+	this->isCollided = false;
+	this->isOnFloor = false;
+	this->collisionDirection = None;
+
+	this->collisionDetectorX = { 
+		0, 
+		0,
 		this->dstRect.width + 2,
-		this->dstRect.height
+		this->dstRect.height - RENDERED_TILE_SIZE / 2
+	};
+
+	this->collisionDetectorY = {
+		0,
+		0,
+		this->dstRect.width / 2,
+		RENDERED_TILE_SIZE / 2
 	};
 }
 
@@ -31,7 +41,8 @@ void Player::draw() const {
 		WHITE
 	);
 
-	DrawRectanglePro(this->collisionDetector, { 0,0 }, 0.0f, PINK);
+	DrawRectanglePro(this->collisionDetectorX, { 0, 0 }, 0.0f, { 255, 0, 0, 100 });
+	DrawRectanglePro(this->collisionDetectorY, { 0, 0 }, 0.0f, { 0, 255, 0, 100 });
 }
 
 Vector2 Player::getPosition() {
@@ -57,15 +68,18 @@ void Player::update() {
 	this->handle_controls();
 	this->handle_movement();
 
-	this->collisionDetector.x = this->dstRect.x - 1;
-	this->collisionDetector.y = this->dstRect.y + RENDERED_TILE_SIZE / 2;
+	this->collisionDetectorX.x = this->dstRect.x - 1;
+	this->collisionDetectorX.y = this->dstRect.y + RENDERED_TILE_SIZE / 8;
+
+	this->collisionDetectorY.x = this->dstRect.x + RENDERED_TILE_SIZE / 4;
+	this->collisionDetectorY.y = this->dstRect.y + RENDERED_TILE_SIZE / 2;
 }
 
 void Player::handle_movement() {
 	float tick = GetFrameTime();
 
-	Rectangle collision = Map::GetInstance()->GetCollisionRectangle(this);
-	if (collision.width != 0) {
+	Rectangle collision = Map::GetInstance()->GetCollisionRectangleX(this);
+	if (collision.x != 0) {
 		this->isCollided = true;
 		this->collisionDirection = this->dstRect.x - collision.x > 0 ? Left : Right;
 	}
@@ -104,11 +118,16 @@ Rectangle Player::getDstRect() const {
 	return this->dstRect;
 }
 
-Rectangle Player::getCollisionChecker() const {
-	return this->collisionDetector;
+Rectangle Player::getCollisionCheckerX() const {
+	return this->collisionDetectorX;
+}
+
+Rectangle Player::getCollisionCheckerY() const {
+	return this->collisionDetectorY;
 }
 
 void Player::handleGravity(float ticks) {
-	Rectangle collision = Map::GetInstance()->GetCollisionRectangle(this);
-	this->isOnFloor = collision.y == 0;
+	Rectangle collision = Map::GetInstance()->GetCollisionRectangleY(this);
+
+	this->isOnFloor = ((collision.y + static_cast<float>(RENDERED_TILE_SIZE)) - this->dstRect.y) > 2;
 }

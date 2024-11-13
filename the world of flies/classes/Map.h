@@ -8,6 +8,8 @@
 #include "Player.h"
 #include "Tile.h"
 
+using namespace tinyxml2;
+
 class Map {
 private:
 	static Map* instance;
@@ -28,8 +30,10 @@ public:
 	static Map* GetInstance();
 
 	void draw();
-	Rectangle GetCollisionRectangle(Player* player);
 	void load_tiles();
+	
+	Rectangle GetCollisionRectangleX(Player* player);
+	Rectangle GetCollisionRectangleY(Player* player);
 };
 
 #endif // !MAP_H

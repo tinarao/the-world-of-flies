@@ -123,12 +123,25 @@ void Map::draw() {
 	}
 }
 
-Rectangle Map::GetCollisionRectangle(Player* player) {
+Rectangle Map::GetCollisionRectangleX(Player* player) {
 	Rectangle collisionRect = { 0, 0, 0, 0 };
 
 	for (const auto& tile : this->tiles) {
-		if (CheckCollisionRecs(player->getCollisionChecker(), tile.getDstRect())) {
-			collisionRect = GetCollisionRec(player->getCollisionChecker(), tile.getDstRect());
+		if (CheckCollisionRecs(player->getCollisionCheckerX(), tile.getDstRect())) {
+			collisionRect = GetCollisionRec(player->getCollisionCheckerX(), tile.getDstRect());
+			break;
+		}
+	}
+
+	return collisionRect;
+}
+
+Rectangle Map::GetCollisionRectangleY(Player* player) {
+	Rectangle collisionRect = { 0, 0, 0, 0 };
+
+	for (const auto& tile : this->tiles) {
+		if (CheckCollisionRecs(player->getCollisionCheckerY(), tile.getDstRect())) {
+			collisionRect = GetCollisionRec(player->getCollisionCheckerY(), tile.getDstRect());
 			break;
 		}
 	}

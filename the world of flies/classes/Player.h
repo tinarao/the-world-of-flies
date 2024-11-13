@@ -7,7 +7,9 @@ class Player {
 private:
 	Rectangle srcRect;
 	Rectangle dstRect;
-	Rectangle collisionDetector;
+
+	Rectangle collisionDetectorX;
+	Rectangle collisionDetectorY;
 
 	Texture2D texture;
 
@@ -16,7 +18,8 @@ private:
 
 	enum CollisionDirection {
 		Left = 0,
-		Right
+		Right,
+		None
 	};
 
 	enum State {
@@ -39,7 +42,10 @@ public:
 
 	Vector2 getPosition();
 	Rectangle getDstRect() const;
-	Rectangle getCollisionChecker() const;
+
+	Rectangle getCollisionCheckerX() const;
+	Rectangle getCollisionCheckerY() const;
+
 	void handleGravity(float ticks);
 };
 

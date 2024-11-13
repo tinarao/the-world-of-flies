@@ -12,7 +12,7 @@ int main() {
 	Texture2D bg_tex = TextureManager::GetInstance()->load("assets/bg.png", "bg");
 	Texture2D player_tex = TextureManager::GetInstance()->load("assets/player/walk.png", "player_idle");
 	Texture2D grass_tex = TextureManager::GetInstance()->load("assets/terrain/grass.png", "terrain_grass");
-	Player player = Player(100, 450, player_tex);
+	Player player = Player(300, 450, player_tex);
 
 	Camera2D camera = Camera2D{
 		{ SCREEN_W / 2 - RENDERED_TILE_SIZE / 2, SCREEN_H / 2 - RENDERED_TILE_SIZE / 2 },
